@@ -15,53 +15,52 @@ Thanks.
 '''
 
 def checkEqualSize(v1, v2):
-	if len(v1) != len(v2):
-		raise Exception("Vectors do not have the same amount of elements!")
+    if len(v1) != len(v2):
+        raise Exception("Vectors do not have the same amount of elements!")
 
-	return len(v1)
+    return len(v1)
 
 def addVectors(v1, v2):
-	size = checkEqualSize(v1, v2)
-	return tuple(v1[i] + v2[i] for i in range(size))
+    size = checkEqualSize(v1, v2)
+    return tuple(v1[i] + v2[i] for i in range(size))
 
 def scaleVector(scalar, vector):
-	return tuple(vector[i] * scalar for i in range(len(vector)))
+    return tuple(vector[i] * scalar for i in range(len(vector)))
 
 def dotProduct(v1, v2):
-	size = checkEqualSize(v1, v2)
+    size = checkEqualSize(v1, v2)
 
-	# s means sum. stupid reserve
-	s = 0
-	for i in range(size): s += v1[i] * v2[i]
-	return s
+    # s means sum. stupid reserve
+    s = 0
+    for i in range(size): s += v1[i] * v2[i]
+    return s
 
 def vectorMagnitude(vector):
-	return dotProduct(vector, vector)
+    return dotProduct(vector, vector)
 
 def determinant(matrix):
-	size = checkEqualSize(matrix, matrix[0])
+    size = checkEqualSize(matrix, matrix[0])
 
-	# edge case
-	if(size == 2):
-		return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
+    # edge case
+    if(size == 2):
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
 
+    s = 0
+    multiplier = 1
 
-	s = 0
-	multiplier = 1
+    for index, value in enumerate(matrix[0]):
 
-	for index, value in enumerate(matrix[0]):
+        newMatrix = []
 
-		newMatrix = []
+        for j in matrix[1:]:
+            ls = []
+            newMatrix.append(ls)
+            for i, v in enumerate(j):
+                if(i != index):
+                    ls.append(v)
 
-		for j in matrix[1:]:
-			ls = []
-			newMatrix.append(ls)
-			for i, v in enumerate(j):
-				if(i != index):
-					ls.append(v)
+        s += multiplier * value * determinant(newMatrix)
 
-		s += multiplier * value * determinant(newMatrix)
+        multiplier *= -1
 
-		multiplier *= -1
-
-	return s
+    return s
