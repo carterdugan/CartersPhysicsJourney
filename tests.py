@@ -32,5 +32,9 @@ class TestVectorMath(ut.TestCase):
         self.assertEqual(determinant(self.matrix1), -2)
         self.assertEqual(determinant(self.matrix2), 0)
 
+    def testNormalizeVector(self):
+        self.assertEqual(normalizeVector(self.v1), (1/5, 2/5))
+        self.assertEqual(normalizeVector(self.v3), (1/14, 2/14, 3/14))
+
 if __name__ == '__main__':
     ut.main()

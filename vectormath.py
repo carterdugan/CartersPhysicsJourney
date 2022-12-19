@@ -64,3 +64,6 @@ def determinant(matrix):
         multiplier *= -1
 
     return s
+
+def normalizeVector(vector):
+    return scaleVector(1 / vectorMagnitude(vector), vector)
